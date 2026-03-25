@@ -14,6 +14,7 @@
 //#include <fj_tool/fipp.h>
 //#include <fjcoll.h>
 #include "profiler.h"
+#include "report.h"
 
 //#include "measure.h"
 //#include "matvec.h"
