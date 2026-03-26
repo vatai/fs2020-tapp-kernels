@@ -7,19 +7,19 @@
 #PJM -j
 #PJM -S
 
-module list
-set -x
-date
-hostname
-
-TMPDIR=${HOME}/tmp/check_QCD-DDD
-mkdir -p ${TMPDIR}
-cd ${TMPDIR}/
-if [ $? != 0 ] ; then echo '@@@ Directory error @@@'; exit; fi
-rm *
-
-SRC_DIR=${HOME}/fs2020_kernels/src/QCD.ddd_in_s_.20170621
-cp -rp ${SRC_DIR}/* ./
+# module list
+# set -x
+# date
+# hostname
+# 
+# TMPDIR=${HOME}/tmp/check_QCD-DDD
+# mkdir -p ${TMPDIR}
+# cd ${TMPDIR}/
+# if [ $? != 0 ] ; then echo '@@@ Directory error @@@'; exit; fi
+# rm *
+# 
+# SRC_DIR=${HOME}/fs2020_kernels/src/QCD.ddd_in_s_.20170621
+# cp -rp ${SRC_DIR}/* ./
 
 CXXFLAGS="-std=gnu++11 -Kfast,restp=all,ocl,preex,openmp,noswp,noprefetch -DRDC -DV512 -Icommon/include -K__control=0x4"
 CFLAGS="-std=c99 -Kfast,restp=all,ocl,preex,openmp,noswp,noprefetch -DRDC -DV512 -Icommon/include -K__control=0x4 -DDISABLE_VALIDATION "
@@ -33,7 +33,4 @@ fcc -c ${CFLAGS} common/src/report.c
 FCC ${CXXFLAGS} *.o
 
 export OMP_NUM_THREADS=12
-time ./a.out
-
-ls -l
-exit
+time -p ./a.out
