@@ -7,23 +7,23 @@
 #PJM -j
 #PJM -S
 
-module list
-set -x
-date
-hostname
-
-TMPDIR=${HOME}/tmp/check_Adventure.region0
-mkdir -p ${TMPDIR}
-cd ${TMPDIR}/
-if [ $? != 0 ] ; then echo '@@@ Directory error @@@'; exit; fi
-rm *
-
-SRC_DIR=${HOME}/fs2020_kernels/src/Adventure.region0.20170821
-cp -rp ${SRC_DIR}/* ./
+# module list
+# set -x
+# date
+# hostname
+# 
+# TMPDIR=${HOME}/tmp/check_Adventure.region0
+# mkdir -p ${TMPDIR}
+# cd ${TMPDIR}/
+# if [ $? != 0 ] ; then echo '@@@ Directory error @@@'; exit; fi
+# rm *
+# 
+# SRC_DIR=${HOME}/fs2020_kernels/src/Adventure.region0.20170821
+# cp -rp ${SRC_DIR}/* ./
 
 OPTIMIZE="-Kfast,openmp,ocl,swp_strong -falign-loops -Icommon/include "
 FOPTIMIZE="${OPTIMIZE} -Cpp -fw "
-COPTIMIZE="${OPTIMIZE} --std=c99 -D__ARM_FEATURE_SVE=1 -DDISABLE_VALIDATION "
+COPTIMIZE="${OPTIMIZE} --std=c99 -D__ARM_FEATURE_SVE=1" # -DDISABLE_VALIDATION "
 
 
 fcc -c ${COPTIMIZE} -o adventure.o adventure_kernel_region0_tune4_arm_pad-acle.c
