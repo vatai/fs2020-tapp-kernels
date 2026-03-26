@@ -21,7 +21,7 @@
 # SRC_DIR=${HOME}/fs2020_kernels/src/QCD.ddd_in_s_.20170621
 # cp -rp ${SRC_DIR}/* ./
 
-CXXFLAGS="-std=gnu++11 -Kfast,restp=all,ocl,preex,openmp,noswp,noprefetch -DRDC -DV512 -Icommon/include -K__control=0x4"
+CXXFLAGS="-std=gnu++11 -g -Kfast,restp=all,ocl,preex,openmp,noswp,noprefetch -DRDC -DV512 -Icommon/include -K__control=0x4"
 CFLAGS="-std=c99 -Kfast,restp=all,ocl,preex,openmp,noswp,noprefetch -DRDC -DV512 -Icommon/include -K__control=0x4 -DDISABLE_VALIDATION "
 
 for i in \
