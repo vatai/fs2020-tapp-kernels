@@ -33,4 +33,4 @@ fcc ${COPTIMIZE} adventure.o report.o
 
 export OMP_NUM_THREADS=12
 export FLIB_TRACEBACK_MEM_SIZE=128
-time ./a.out
+time -p ./a.out

@@ -22,7 +22,8 @@
 //#include <mpi.h>
 
 #if 1
-//  SIZE = 6*MAX_DIAG_BLOCKS
+#define MAX_DIAG_BLOCKS  (1*840)
+// SIZE = 6*MAX_DIAG_BLOCKS
 #define SIZE 5040
 #endif
 
@@ -40,7 +41,6 @@ static double result[SIZE];
 
 //#define MAX_INSTANCES     32
 #define MAX_INSTANCES     1
-#define MAX_DIAG_BLOCKS  840
 #define MAX_OFF_DIAG_BLOCKS ((MAX_DIAG_BLOCKS * (MAX_DIAG_BLOCKS - 1)) / 2)
 
 static double DiagComponents[MAX_INSTANCES][MAX_DIAG_BLOCKS][6][6];
