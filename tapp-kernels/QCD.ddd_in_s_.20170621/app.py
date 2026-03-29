@@ -60,7 +60,7 @@ class QcdDdd(App):
             "make",
             f"{str(self.output_binary)}",
             f"PROG={str(self.output_binary)}",
-            f"{self.target}={str(self.source)}",
+            f"{self.target}={str(self.output_binary)}",
         ]
         return cmd
 
@@ -68,8 +68,12 @@ class QcdDdd(App):
         return [f"./{str(self.output_binary)}"]
 
     def extract_runtime(self, proc):
-        print("{proc.stdout.decode()=")
-        return 0.3
+        stdout = proc.stdout.decode()
+        for line in stdout.split("\n"):
+            if "WALLTIME:" in line:
+                rv = float(line.replace("s", "").split()[1])
+                return rv
+        raise RuntimeError()
 
 
 def main():
