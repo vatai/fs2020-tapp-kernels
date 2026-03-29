@@ -27,6 +27,10 @@
 #include "report.h"
 #include "profiler.h"
 
+#include <stdio.h>
+#include <ctime>
+#include <time.h>
+
 extern int vold, vols, rank, nx, ny, nz, nt, nxh, nxd, nxs;
 extern double kappa2, kappa, mkappa;
 extern "C" void qws_init_(int* lx,  int* ly, int* lz, int* lt, int* npe_f, int* fbc_f, int* pce_f, int* pco_f, int* block_size);
@@ -84,7 +88,13 @@ int main()
   int nsap, nm;
   nsap = 4;
   nm = 2;
+  struct timespec start, end;
+  clock_gettime(CLOCK_REALTIME, &start);
   bicgstab_dd_mix_(0, 0, &tol, &iter, &maxiter, &tol_s, &maxiter_s, &nsap, &nm);
+  clock_gettime(CLOCK_REALTIME, &end);
+  double second = (end.tv_sec - start.tv_sec) +  (end.tv_nsec - start.tv_nsec) * 1.0e-9;
+  printf("WALLTIME: %fs\n", second);
+
 
 #ifdef DS_TO_DOUBLE
   report_validation(get_ss_r8(result_arr, result_arr_len), -4.180054191179794e+307, 0.01);
