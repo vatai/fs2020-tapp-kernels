@@ -1,16 +1,27 @@
 #!/usr/bin/env python
 
 import os
+import sys
 from pathlib import Path
 from typing import Optional
 
-from tadashi.apps import Simple
+from tadashi.apps import App
 from tadashi.translators import Polly, Translator
 
-os.environ["LOG_LEVEL"] = "DEBUG"
+ml4tadashi = os.path.dirname(__file__)
+ml4tadashi = os.path.dirname(ml4tadashi)
+ml4tadashi = os.path.dirname(ml4tadashi)
+ml4tadashi = os.path.dirname(ml4tadashi)
+ml4tadashi = os.path.dirname(ml4tadashi)
+ml4tadashi = os.path.dirname(ml4tadashi)
+sys.path.append(ml4tadashi)
+ml4tadashi = os.path.join(ml4tadashi, "ML4TADASHI")
+sys.path.append(ml4tadashi)
+
+from ML4TADASHI import run
 
 
-class Advanture0(Simple):
+class Adventure0(App):
     def __init__(
         self,
         source: str | Path = Path("adventure_kernel_region0_tune4_arm_pad-acle.c"),
@@ -18,10 +29,7 @@ class Advanture0(Simple):
         compiler_options: Optional[list[str]] = None,
         ephemeral: bool = False,
         populate_scops: bool = True,
-        *,
-        runtime_prefix: str = "WALLTIME: ",
     ):
-        self.runtime_prefix = runtime_prefix
         super().__init__(
             source=source,
             translator=translator,
@@ -30,13 +38,27 @@ class Advanture0(Simple):
             populate_scops=populate_scops,
         )
 
+    def codegen_init_args(self):
+        return []
+
     def app_required_options(self) -> list[str]:
         return ["-Icommon/include", "-fopenmp"]
 
+    def compile_cmd(self, suffix: str) -> list[str]:
+        cmd = ["make", f"{str(self.output_binary)}.x", f"APP={str(self.output_binary)}"]
+        return cmd
+
+    def run_cmd(self):
+        return [f"./{str(self.output_binary)}.x"]
+
+    def extract_runtime(self, proc):
+        print("{proc.stdout.decode()=")
+        return 0.3
+
 
 def main():
-    app = Advanture0(translator=Polly())
-    print(f"{len(app.scops)=}")
+    kwargs = {"translator": "Polly"}
+    run(Adventure0, kwargs)
 
 
 if __name__ == "__main__":
