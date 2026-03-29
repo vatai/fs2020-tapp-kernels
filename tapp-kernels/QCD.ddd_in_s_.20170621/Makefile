@@ -4,7 +4,10 @@ CFLAGS = -fopenmp -Icommon/include -DRDC -DVLENS=16 -DEML_LIB -DPREFETCH -D_CHEC
 CXXFLAGS = -std=gnu++11  $(CFLAGS)
 LDLIBS= -lrand
 
-prog.x: bicgstab_dd_mix.o bicgstab_precdd_s.o clover_s.o ddd_in_s.o main.o qws.o common/src/report.o
+PROG=prog
+DDD_IN_S=ddd_in_s
+CLOVER_S=clover_s
+$(PROG): bicgstab_dd_mix.o bicgstab_precdd_s.o $(CLOVER_S).o $(DDD_IN_S).o main.o qws.o common/src/report.o
 	$(CXX) $^ -fopenmp -o $@
 
 scop-detect:
