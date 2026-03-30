@@ -42,7 +42,7 @@ class Adventure0(App):
         return []
 
     def app_required_options(self) -> list[str]:
-        return ["-Icommon/include", "-fopenmp"]
+        return ["-Icommon/include"]
 
     def compile_cmd(self, suffix: str) -> list[str]:
         cmd = ["make", f"{str(self.output_binary)}.x", f"APP={str(self.output_binary)}"]
@@ -52,8 +52,12 @@ class Adventure0(App):
         return [f"./{str(self.output_binary)}.x"]
 
     def extract_runtime(self, proc):
-        print("{proc.stdout.decode()=")
-        return 0.3
+        stdout = proc.stdout.decode()
+        for line in stdout.split("\n"):
+            if "WALLTIME:" in line:
+                rv = float(line.replace("s", "").split()[1])
+                return rv
+        raise RuntimeError()
 
 
 def main():
