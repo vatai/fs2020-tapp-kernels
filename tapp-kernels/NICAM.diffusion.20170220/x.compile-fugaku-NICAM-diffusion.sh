@@ -7,19 +7,19 @@
 #PJM -j
 #PJM -S
 
-module list
-set -x
-date
-hostname
-
-TMPDIR=${HOME}/tmp/check_NICAM.diffusion
-mkdir -p ${TMPDIR}
-cd ${TMPDIR}/
-if [ $? != 0 ] ; then echo '@@@ Directory error @@@'; exit; fi
-rm *
-
-SRC_DIR=${HOME}/fs2020_kernels/src/NICAM.diffusion.20170220
-cp -rp ${SRC_DIR}/* ./
+# module list
+# set -x
+# date
+# hostname
+# 
+# TMPDIR=${HOME}/tmp/check_NICAM.diffusion
+# mkdir -p ${TMPDIR}
+# cd ${TMPDIR}/
+# if [ $? != 0 ] ; then echo '@@@ Directory error @@@'; exit; fi
+# rm *
+# 
+# SRC_DIR=${HOME}/fs2020_kernels/src/NICAM.diffusion.20170220
+# cp -rp ${SRC_DIR}/* ./
 
 OPTIMIZE="-Kfast,openmp,ocl -falign-loops -Icommon/include "
 FOPTIMIZE="${OPTIMIZE} -Cpp -fw -DUSE_FAPP -DSINGLE "
