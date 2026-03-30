@@ -1,7 +1,7 @@
 #include<math.h>
 #include"report.h"
 #ifndef DISABLE_VALIDATION
-#include"io.h"
+#include"stdio.h"
 #endif
 
 void report_validation(double result, double reference, double percent_error) {
