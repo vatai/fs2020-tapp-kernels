@@ -1,7 +1,7 @@
 #!/bin/bash
 #PJM -g ra000012
 #PJM -x PJM_LLIO_GFSCACHE=/vol0004
-#PJM -N ML4T-miniAMR
+#PJM -N ML4T-fs-adv-19
 #PJM -L rscgrp=small
 #PJM -L elapse=2:00:00
 #PJM -L node=5
