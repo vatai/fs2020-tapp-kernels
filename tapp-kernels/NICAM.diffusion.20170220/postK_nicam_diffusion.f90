@@ -473,7 +473,23 @@ end module mod_oprt
     return
   end subroutine dynamics_step
 
+  subroutine get_walltime(wctime)
+    use iso_fortran_env, only: int64
+    implicit none
+    integer, parameter :: dp = kind(1.0d0)
+    real(dp) :: wctime
+    integer(int64) :: r, c
+    call system_clock(c, r)
+    wctime = real(c, dp) / r
+  end subroutine get_walltime
+
 program main
+  ! use iso_fortran_env
+  integer, parameter :: dp = kind(1.0d0)
+  real(dp) :: start_time, end_time
+  call get_walltime(start_time)
     call dynamics_step
+  call get_walltime(end_time)
+  write(0,'(a, F16.9)') "WALLTIME: ",end_time - start_time
 end program main
 
