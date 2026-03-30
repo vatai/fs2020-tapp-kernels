@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 #ifdef	__ARM_FEATURE_SVE
 #include <arm_sve.h>
 #endif
@@ -478,6 +479,9 @@ int main()
      vector[i] = 1.0e0;
      //vector[i] = (double)i + 1.0e0;
   }
+
+  struct timespec start, end;
+  clock_gettime(CLOCK_REALTIME, &start);
   for (iIteration = 0; iIteration < 2; iIteration++) {
   if(iIteration !=0 )  {
       PROF_START("region0");
@@ -501,6 +505,9 @@ int main()
       PROF_STOP("region0");
   }
 }
+  clock_gettime(CLOCK_REALTIME, &end);
+  double second = (end.tv_sec - start.tv_sec) +  (end.tv_nsec - start.tv_nsec) * 1.0e-9;
+  printf("WALLTIME: %fs\n", second);
   PROF_STOP_ALL;
   PROF_FINALIZE;
   /* add. */
