@@ -3,10 +3,11 @@
 #FCFLAGS = -O3 -g -Wall  -ffree-line-length-none  -fallow-argument-mismatch -fopenmp
 #LDFLAGS = -fopenmp
 # for Fugaku
-FC	= frtpx
+FC	= flang
 #FCFLAGS = -O0 -g -Wall  -ffree-line-length-none -fbacktrace -fallow-argument-mismatch -fopenmp
-FCFLAGS = -Kfast,openmp,ocl,simd=2,swp_strong -falign-loops
-LDFLAGS = -Kopenmp
+# FCFLAGS = -Kfast,openmp,ocl,simd=2,swp_strong -falign-loops
+FCFLAGS = -fopenmp
+LDFLAGS = -fopenmp
 OBJS= sub_data_io.o initialize_data.o kernel_pairlist_july.o main.o
 OBJS_conv= sub_data_io.o convert_data.o
 

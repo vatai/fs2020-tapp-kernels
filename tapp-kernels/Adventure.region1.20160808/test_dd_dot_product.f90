@@ -1,9 +1,9 @@
 #include "profiler.h"
 program main
   !!$ use omp_lib
+  implicit none
   external omp_get_thread_num
   integer omp_get_thread_num
-  implicit none
   integer(kind=  4),parameter :: N = 393216
 !  integer(kind=  4),parameter :: M = 12
   integer(kind=  4),parameter :: M = 24

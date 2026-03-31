@@ -4,7 +4,7 @@ program main
     call dynamics_step
 
 !FJ<
-    stop
+!   stop
 end program main
 
 

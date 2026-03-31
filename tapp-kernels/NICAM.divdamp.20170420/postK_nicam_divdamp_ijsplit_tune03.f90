@@ -2,7 +2,7 @@
 
 program main
     call dynamics_step
-    stop
+!   stop
 end program main
 
 !-------------------------------------------------------------------------------

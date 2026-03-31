@@ -7,29 +7,29 @@
 #PJM -j
 #PJM -S
 
-module list
-set -x
-date
-hostname
+# module list
+# set -x
+# date
+# hostname
+# 
+# TMPDIR=${HOME}/tmp/check_NICAM.st_pattern1
+# mkdir -p ${TMPDIR}
+# cd ${TMPDIR}/
+# if [ $? != 0 ] ; then echo '@@@ Directory error @@@'; exit; fi
+# rm *
+# 
+# SRC_DIR=${HOME}/fs2020_kernels/src/streamlike_pattern1
+# cp -rp ${SRC_DIR}/* ./
 
-TMPDIR=${HOME}/tmp/check_NICAM.st_pattern1
-mkdir -p ${TMPDIR}
-cd ${TMPDIR}/
-if [ $? != 0 ] ; then echo '@@@ Directory error @@@'; exit; fi
-rm *
-
-SRC_DIR=${HOME}/fs2020_kernels/src/streamlike_pattern1
-cp -rp ${SRC_DIR}/* ./
-
-OPTIMIZE="-Kfast,openmp,ocl -falign-loops -Icommon/include "
-FOPTIMIZE="${OPTIMIZE} -Cpp -fw -DSINGLE "
+OPTIMIZE="-fopenmp -Icommon/include "
+FOPTIMIZE="${OPTIMIZE} -DSINGLE "
 
 
-frt -c ${FOPTIMIZE} mod_precision.f90
-frt -c ${FOPTIMIZE} mod_streamlike.f90
-frt -c ${FOPTIMIZE} main.f90
+flang -c ${FOPTIMIZE} mod_precision.f90
+flang -c ${FOPTIMIZE} mod_streamlike.f90
+flang -c ${FOPTIMIZE} main.f90
 #	fcc -c ${COPTIMIZE} common/src/report.c
-frt ${FOPTIMIZE} *.o
+flang ${FOPTIMIZE} *.o
 
 export OMP_NUM_THREADS=12
 export FLIB_TRACEBACK_MEM_SIZE=128

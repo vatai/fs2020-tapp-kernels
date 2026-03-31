@@ -98,6 +98,6 @@ program commonkernel_streamlike
   PROF_STOP_ALL
   PROF_FINALIZE
 
-  stop
+! stop
 end program commonkernel_streamlike
 !-------------------------------------------------------------------------------
