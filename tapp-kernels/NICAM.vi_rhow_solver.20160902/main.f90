@@ -133,8 +133,8 @@ end program main
     PROF_STOP_ALL
     PROF_FINALIZE
 #ifdef USE_TIMER
-    write(*,*)"t_kernel ",t_kernel
-    write(*,*)"t_all ",t_all
+    write(*,'(A, F10.7)')"WALLTIME: ",t_kernel
+    write(*,'(A, F10.7)')"TOTAL TIME:",t_all
 #endif
 
 #ifdef OUTPUTCHECK
@@ -156,4 +156,14 @@ end program main
 
     return
   end subroutine dynamics_step
+
+  subroutine gettod(wctime)
+    use iso_fortran_env, only: int64
+    implicit none
+    integer, parameter :: dp = kind(1.0d0)
+    real(dp) :: wctime
+    integer(int64) :: r, c
+    call system_clock(c, r)
+    wctime = real(c, dp) / r
+  end subroutine gettod
 
