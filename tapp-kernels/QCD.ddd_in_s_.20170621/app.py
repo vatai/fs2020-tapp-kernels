@@ -77,7 +77,10 @@ class QcdDdd(App):
 
 
 def main():
-    kwargs = {"translator": "Polly"}
+    kwargs = {
+            "translator": "Polly",
+            "translator_params": "clang++",
+            }
     run(QcdDdd, kwargs)
 
 
