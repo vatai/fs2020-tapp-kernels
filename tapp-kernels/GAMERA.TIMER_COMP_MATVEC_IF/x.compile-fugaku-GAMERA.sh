@@ -6,19 +6,19 @@
 #PJM -j
 #PJM -S
 
-module list
-date
-hostname
-
-TMPDIR=${HOME}/tmp/check_GAMERA
-mkdir -p ${TMPDIR}
-cd ${TMPDIR}/
-if [ $? != 0 ] ; then echo '@@@ Directory error @@@'; exit; fi
-rm *.o
-
-SRC_DIR=${HOME}/fs2020_kernels/src/GAMERA.TIMER_COMP_MATVEC_IF
-cp -rp ${SRC_DIR}/* ./
-gunzip data_file_77.gz
+# module list
+# date
+# hostname
+# 
+# TMPDIR=${HOME}/tmp/check_GAMERA
+# mkdir -p ${TMPDIR}
+# cd ${TMPDIR}/
+# if [ $? != 0 ] ; then echo '@@@ Directory error @@@'; exit; fi
+# rm *.o
+# 
+# SRC_DIR=${HOME}/fs2020_kernels/src/GAMERA.TIMER_COMP_MATVEC_IF
+# cp -rp ${SRC_DIR}/* ./
+# gunzip data_file_77.gz
 
 OPTIMIZE="-Kfast,openmp,ocl -Kloop_nofission -Icommon/include -DREAL_4=real -DMAXCOLOR=100 "
 FOPTIMIZE="${OPTIMIZE} -Cpp "
